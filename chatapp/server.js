@@ -7,13 +7,14 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
     maxHttpBufferSize: 1e7 // Set max HTTP buffer size to 1MB
-  });
+});
 
 app.use(express.static('public'));
 
-io.on('connection', (socket)=> {
+io.on('connection', (socket) => {
     console.log('A new user has connected');
 
+    //send message functions
     socket.on('chat message', (msg) => {
         // Assume 'socket.username' stores the username of the connected client
         console.log(`Received message from ${socket.username}: ${msg}`);
@@ -27,7 +28,7 @@ io.on('connection', (socket)=> {
             console.log('Error: Username not set for the message received');
         }
     });
-
+    //handle disconnection event
     socket.on('disconnect', () => {
         console.log('A user has disconnected');
         if (socket.username && activeUsernames[socket.username]) {
@@ -37,8 +38,8 @@ io.on('connection', (socket)=> {
         }
     })
 
-     // Register username for new connections
-     socket.on('register username', (username) => {
+    // Register username for new connections
+    socket.on('register username', (username) => {
         if (!activeUsernames[username]) {
             activeUsernames[username] = socket.id;
             socket.username = username; // Also set the username here
@@ -48,23 +49,24 @@ io.on('connection', (socket)=> {
         } else {
             socket.emit('username rejected', 'Username is already taken');
         }
-        
-    });
-        //Typing function
-        socket.on('userTyping', (data) => {
-            io.emit('typing', data);
-        });
 
-        //send photo
-        socket.on('send image', function(data) {
-            // Broadcast the image data to all connected clients
-            io.emit('receive image', data.image, socket.username);
-        });
-    
+    });
+    //Typing function
+    socket.on('userTyping', (data) => {
+        io.emit('typing', data);
+    });
+
+    //send photo function
+    socket.on('send image', function (data) {
+        // Broadcast the image data to all connected clients
+        io.emit('receive image', data.image, socket.username);
+    });
+
 })
 
+//start server
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, ()=>{
+server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 })
 

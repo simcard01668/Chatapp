@@ -1,25 +1,27 @@
+/* user registration hidden */
 .hidden {
     display: none;
 }
+
 /* Basic reset for padding and margins */
-body, h1, div, form, input, button {
+/* Basic styling for the body */
+body
+ {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-/* Basic styling for the body */
-body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 10px;
     background-color: #ccc;
 }
 
+
 /* Header styling */
 h1 {
     color: #333;
     text-align: center;
+    border: 1px solid #333;
 }
 
 /* Container for the entire chat application */
@@ -61,16 +63,17 @@ h1 {
     margin-right: 5px;
 }
 
+/* The input field */
 #usernameInput {
-    border:none;
-    outline:none;
-    height:34px;
-    bottom:14px;
-    right:9px;
-    border-radius:22px;
-    width:220px;
-    box-sizing:border-box;
-    padding:0 18px; 
+    border: none;
+    outline: none;
+    height: 34px;
+    bottom: 14px;
+    right: 9px;
+    border-radius: 22px;
+    width: 220px;
+    box-sizing: border-box;
+    padding: 0 18px;
 }
 
 /* General button styling */
@@ -99,23 +102,24 @@ button:hover {
 }
 
 ul li {
-    color:green;
-    list-style-type:circle;
-    font-weight: bold;
-    }
-
-ul li span{
-    color:black;
-    font-weight: bold;
-    }
-
-#namePlace{
+    color: green;
+    list-style-type: circle;
     font-weight: bold;
 }
-        
 
-input[type="file"]{
-display: none;}
+ul li span {
+    color: black;
+    font-weight: bold;
+}
+
+#namePlace {
+    font-weight: bold;
+}
+
+
+input[type="file"] {
+    display: none;
+}
 
 label {
     display: flex;
@@ -134,7 +138,7 @@ label:hover {
 }
 
 img {
-    display:block;
+    display: block;
     width: 500px;
 }
 
@@ -143,4 +147,4 @@ img {
     img {
         width: 300px;
     }
-  }
+}
